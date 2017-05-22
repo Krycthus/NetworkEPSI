@@ -8,6 +8,15 @@ public class User {
 	private String password;
 	private Boolean administrator;
 	
+	public User(){
+		
+	}
+	
+	public User(String id, String password){
+		this.id = id;
+		this.password = password;
+	}
+	
 	public User(String id, String password, boolean administrator) {
 		this.id = id;
 		this.password = password;

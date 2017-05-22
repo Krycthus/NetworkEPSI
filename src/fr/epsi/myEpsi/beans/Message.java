@@ -12,6 +12,16 @@ public class Message {
 	private Timestamp updateDate;
 	private Status status;
 	
+	public Message(Long id, String title, String content, User author, Timestamp creationDate, Timestamp updateDate, Status status){
+		this.id = id;
+		this.title = title;
+		this.content = content;
+		this.author = author;
+		this.creationDate = creationDate;
+		this.updateDate = updateDate;
+		this.status = status;
+	}
+	
 	public Status getStatus() {
 		return status;
 	}

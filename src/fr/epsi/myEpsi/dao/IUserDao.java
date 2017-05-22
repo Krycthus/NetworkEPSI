@@ -11,5 +11,5 @@ public interface IUserDao {
 	void addUser(User user);
 	void updateUser(User user);
 	void deleteUser(User user);
-	
+	User getUser (User user);
 }

@@ -134,5 +134,31 @@ public class UserDao implements IUserDao {
 		}
 
 	}
-
+	
+	public User getUser (User user){
+		try {
+			Class.forName("org.hsqldb.jdbcDriver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		Connection con;
+		ResultSet resultat = null;
+		User newUser = null;
+		
+		try {
+			con = DriverManager.getConnection("jdbc:hsql:hsql://localhost:9003");
+			PreparedStatement ps = con.prepareStatement("SELECT user WHERE id = ? AND password = ?" );
+			ps.setString(1, user.getId());
+			ps.setString(2, user.getPassword());
+			resultat = ps.executeQuery();
+			while(resultat.next()){
+				newUser = new User(resultat.getString(1), resultat.getString(2), resultat.getBoolean(3));
+			}
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return newUser;
+	}
 }
