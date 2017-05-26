@@ -1,4 +1,4 @@
-#.gitignore
+#Fichiers ou chemins à ignorer
 .setting/
 /build/
 .classpath
