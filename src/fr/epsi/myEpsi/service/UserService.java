@@ -16,8 +16,7 @@ public class UserService implements IUserService {
 	
 	@Override
 	public List<User> getListOfUsers() {
-		
-		return null;
+		return userDao.getListOfUsers();
 	}
 
 	@Override

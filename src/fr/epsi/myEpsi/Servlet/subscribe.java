@@ -31,6 +31,7 @@ public class subscribe extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	/**
@@ -42,11 +43,10 @@ public class subscribe extends HttpServlet {
 		String password = request.getParameter("MotDePasse");
 		String passwordConfirm = request.getParameter("MotDePasseConfirmation");
 		
-		if(password == passwordConfirm){
-			User user = new User(username, password, false);
-			UserService us = new UserService();
-			us.addUser(user);
-		}
+		User user = new User(username, password, false);
+		UserService us = new UserService();
+		us.addUser(user);
+		
 		
 		doGet(request, response);
 	}

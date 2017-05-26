@@ -13,22 +13,28 @@ import java.sql.ResultSet;
 import fr.epsi.myEpsi.beans.User;
 
 public class UserDao implements IUserDao {
+	
+	private Connection con;
+	
+	public UserDao() {
+		try{
+			Class.forName("org.hsqldb.jdbcDriver");
+			con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost:9003","SA","");
+		} catch (ClassNotFoundException e){
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public List<User> getListOfUsers() {
-		try {
-			Class.forName("org.hsqldb.jdbcDriver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		Connection con;
 		
 		ResultSet resultats = null;
 		String requete = "SELECT * FROM USERS";
 		ArrayList<User> user = new ArrayList<User>();
 		
 		try{
-			con = DriverManager.getConnection("jdbc:hsql:hsql://localhost:9003");
 			Statement stmt = con.createStatement();
 			resultats = stmt.executeQuery(requete);
 			while(resultats.next()){
@@ -42,17 +48,9 @@ public class UserDao implements IUserDao {
 
 	@Override
 	public User getUserById(String id) {
-		try {
-			Class.forName("org.hsqldb.jdbcDriver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		Connection con;
 		ResultSet resultats = null;
 		
 		try {
-			con = DriverManager.getConnection("jdbc:hsql:hsql://localhost:9003");
 			PreparedStatement ps = con.prepareStatement("SELECT * FROM users WHERE id = ?");
 			ps.setString(1, id);
 			resultats = ps.executeQuery();
@@ -70,17 +68,7 @@ public class UserDao implements IUserDao {
 	@Override
 	public void addUser(User user) {
 		try {
-			Class.forName("org.hsqldb.jdbcDriver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	
-		
-		Connection con;
-		
-		try {
-			con = DriverManager.getConnection("jdbc:hsql:hsql://localhost:9003");
-			PreparedStatement ps = con.prepareStatement("INSERT INTO user VALUES ?,?,?");
+			PreparedStatement ps = con.prepareStatement("INSERT INTO USERS (ID, PASSWORD, ISADMINISTRATOR) VALUES (?,?,?);");
 			ps.setString(1, user.getId());
 			ps.setString(2, user.getPassword());
 			ps.setBoolean(3, user.getAdministrator());
@@ -94,16 +82,7 @@ public class UserDao implements IUserDao {
 	@Override
 	public void updateUser(User user) {
 		try {
-			Class.forName("org.hsqldb.jdbcDriver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		Connection con;
-		
-		try {
-			con = DriverManager.getConnection("jdbc:hsql:hsql://localhost:9003");
-			PreparedStatement ps = con.prepareStatement("UPDATE user SET password, administrator WHERE id = ?");
+			PreparedStatement ps = con.prepareStatement("UPDATE USERS SET password, administrator WHERE id = ?;");
 			ps.setString(1, user.getId());
 			ps.executeUpdate();
 			con.close();
@@ -116,15 +95,6 @@ public class UserDao implements IUserDao {
 	@Override
 	public void deleteUser(User user) {
 		try {
-			Class.forName("org.hsqldb.jdbcDriver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		Connection con;
-		
-		try {
-			con = DriverManager.getConnection("jdbc:hsql:hsql://localhost:9003");
 			PreparedStatement ps = con.prepareStatement("DELETE user WHERE id = ?");
 			ps.setString(1, user.getId());
 			ps.executeUpdate();
@@ -136,19 +106,11 @@ public class UserDao implements IUserDao {
 	}
 	
 	public User getUser (User user){
-		try {
-			Class.forName("org.hsqldb.jdbcDriver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		Connection con;
 		ResultSet resultat = null;
 		User newUser = null;
 		
 		try {
-			con = DriverManager.getConnection("jdbc:hsql:hsql://localhost:9003");
-			PreparedStatement ps = con.prepareStatement("SELECT user WHERE id = ? AND password = ?" );
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM USERS WHERE ID = ? AND PASSWORD = ?" );
 			ps.setString(1, user.getId());
 			ps.setString(2, user.getPassword());
 			resultat = ps.executeQuery();
