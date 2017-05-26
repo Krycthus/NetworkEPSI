@@ -1,0 +1,6 @@
+#.gitignore
+.setting/
+/build/
+.classpath
+.projet
+.DS_Store
