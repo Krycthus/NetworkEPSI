@@ -4,6 +4,6 @@ EPSI'Chat est un réseau social développé en Java-JEE avec une base de donnée
 
 # TEAM
 
-Barabé Pierre
-Thibault Robert
-Yohan Canac
+* Barabé Pierre
+* Thibault Robert
+* Yohan Canac
