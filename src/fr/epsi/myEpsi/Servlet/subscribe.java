@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.epsi.myEpsi.service.UserService;
 import fr.epsi.myEpsi.beans.User;
+import fr.epsi.myEpsi.forms.Signup;
 
 /**
  * Servlet implementation class subscribe
@@ -39,15 +40,9 @@ public class subscribe extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String username = request.getParameter("username");
-		String password = request.getParameter("MotDePasse");
-		String passwordConfirm = request.getParameter("MotDePasseConfirmation");
-		
-		User user = new User(username, password, false);
-		UserService us = new UserService();
-		us.addUser(user);
-		
-		
+		Signup signup = new Signup();		
+		User user = signup.createUser(request);
+		request.setAttribute("user", user);
 		doGet(request, response);
 	}
 
