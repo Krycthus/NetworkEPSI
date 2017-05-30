@@ -22,26 +22,23 @@ public class MessageService implements IMessageService {
 
 	@Override
 	public Message getMessage(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return messageDAO.getMessage(id);
 	}
 
 	@Override
 	public void addMessage(Message message) {
-		// TODO Auto-generated method stub
+		messageDAO.addMessage(message);
 		
 	}
 
 	@Override
 	public void updateMessageStatus(Message message, int status) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void deleteMessage(Message message) {
-		// TODO Auto-generated method stub
-		
+		messageDAO.deleteMessage(message);
 	}
 	
 	

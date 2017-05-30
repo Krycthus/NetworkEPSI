@@ -66,7 +66,7 @@ public class UserDao implements IUserDao {
 	}
 
 	@Override
-	public void addUser(User user) {
+	public User addUser(User user) {
 		try {
 			PreparedStatement ps = con.prepareStatement("INSERT INTO USERS (ID, PASSWORD, ISADMINISTRATOR) VALUES (?,?,?);");
 			ps.setString(1, user.getId());
@@ -77,6 +77,8 @@ public class UserDao implements IUserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return user;
 	}
 
 	@Override

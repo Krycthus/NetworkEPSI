@@ -7,8 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import fr.epsi.myEpsi.beans.*;
+import fr.epsi.myEpsi.beans.User;
 import fr.epsi.myEpsi.service.UserService;
+import fr.epsi.myEpsi.forms.Login;
 
 /**
  * Servlet implementation class login
@@ -38,18 +39,9 @@ public class login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		User user = new User(username, password);
-		UserService us = new UserService();
-		
-		if(us.getUser(user) == null){
-			System.out.println("L'utilisateur n'existe pas !");
-		} else {			
-			HttpSession httpSession = request.getSession();
-			httpSession.setAttribute("user", user);
-			
-			doGet(request, response);	
-		}
+		Login login = new Login();	
+		User user = login.getConnectUser(request);
+		request.setAttribute("user", user);
+		doGet(request, response);	
 	}
 }

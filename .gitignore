@@ -1,6 +1,6 @@
-#Fichiers ou chemins à ignorer
-.settings/
+#Fichiers et chemins à ignorer
+.settings
 /build/
 .classpath
-.project
 .DS_Store
+.project

@@ -12,6 +12,10 @@ public class Message {
 	private Timestamp updateDate;
 	private Status status;
 	
+	public Message () {
+		
+	}
+	
 	public Message(Long id, String title, String content, User author, Timestamp creationDate, Timestamp updateDate, Status status){
 		this.id = id;
 		this.title = title;
@@ -64,6 +68,4 @@ public class Message {
 	public void setUpdateDate(Timestamp updateDate) {
 		this.updateDate = updateDate;
 	}
-
-
 }
