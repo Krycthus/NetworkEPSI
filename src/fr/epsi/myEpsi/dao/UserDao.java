@@ -76,6 +76,7 @@ public class UserDao implements IUserDao {
 			ps.executeUpdate();
 			con.close();
 		} catch (SQLException e) {
+			user = null;
 			e.printStackTrace();
 		}
 		
