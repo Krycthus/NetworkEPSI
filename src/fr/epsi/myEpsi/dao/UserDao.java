@@ -49,20 +49,20 @@ public class UserDao implements IUserDao {
 	@Override
 	public User getUserById(String id) {
 		ResultSet resultats = null;
-		
+		User user = null;
 		try {
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM users WHERE id = ?");
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM USERS WHERE ID = ?");
 			ps.setString(1, id);
 			resultats = ps.executeQuery();
 			System.out.println(ps.getParameterMetaData());
 			while(resultats.next()) {
-				return new User(resultats.getString(1), resultats.getString(2), resultats.getBoolean(3));
+				user = new User(resultats.getString(1), resultats.getString(2), resultats.getBoolean(3));
 			}		
 			con.close();
 		} catch (SQLException e){
 			e.printStackTrace();
 		}		
-		return null;
+		return user;
 	}
 
 	@Override
@@ -72,6 +72,7 @@ public class UserDao implements IUserDao {
 			ps.setString(1, user.getId());
 			ps.setString(2, user.getPassword());
 			ps.setBoolean(3, user.getAdministrator());
+			System.out.println(user.getId() + " " + user.getPassword() + " " + user.getAdministrator());
 			ps.executeUpdate();
 			con.close();
 		} catch (SQLException e) {

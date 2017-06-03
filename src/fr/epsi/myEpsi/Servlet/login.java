@@ -41,7 +41,8 @@ public class login extends HttpServlet {
 		
 		Login login = new Login();	
 		User user = login.getConnectUser(request);
-		request.setAttribute("user", user);
+		HttpSession session = request.getSession();
+		session.setAttribute("user", user);
 		doGet(request, response);	
 	}
 }

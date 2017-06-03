@@ -21,7 +21,7 @@ public class UserService implements IUserService {
 
 	@Override
 	public User getUserById(String id) {
-		return null;
+		return userDao.getUserById(id);
 	}
 
 	@Override

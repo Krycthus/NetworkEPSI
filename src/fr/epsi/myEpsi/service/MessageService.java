@@ -40,7 +40,4 @@ public class MessageService implements IMessageService {
 	public void deleteMessage(Message message) {
 		messageDAO.deleteMessage(message);
 	}
-	
-	
-
 }

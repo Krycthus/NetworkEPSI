@@ -15,13 +15,12 @@ public class Login extends AForm {
 		String username = getValueFromRequest(request, this.username);
 		String password = getValueFromRequest(request, this.password);
 		
-		System.out.println(username);
-		System.out.println(password);
+		
 		
 		User user = new User();
 		
 		try{
-			user = getUser(username, password);
+			user = this.getUser(username, password);
 		}catch (Exception e){
 			e.printStackTrace();
 		}	
@@ -32,7 +31,9 @@ public class Login extends AForm {
 		
 		UserService us = new UserService();
 		User user = us.getUserById(username);
-		if (user==null || password.equals(user.getPassword())){
+		System.out.println(user.getPassword());
+		
+		if (user==null || !password.equals(user.getPassword())){
 			throw new Exception ("Login / mot de passe incorrect !");
 		} else {
 			return user;
