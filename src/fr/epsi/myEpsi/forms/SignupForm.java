@@ -5,18 +5,18 @@ import javax.servlet.http.HttpServletRequest;
 import fr.epsi.myEpsi.beans.User;
 import fr.epsi.myEpsi.service.UserService;
 
-public class Signup extends AForm {
+public class SignupForm extends AForm {
 	
 	private final String Username = "Admin";
 	private final String Password = "MotDePasse";
 	private final String CurrentPassword = "MotDePasseConfirmation";
 	private Boolean admin;
 	
-	public Signup(){
+	public SignupForm(){
 		this.admin = false;
 	}
 	
-	public Signup(Boolean admin){
+	public SignupForm(Boolean admin){
 		this.admin = admin;
 	}
 	
@@ -26,20 +26,18 @@ public class Signup extends AForm {
 		String CurrentPassword = getValueFromRequest(request, this.CurrentPassword);
 		Boolean resAdmin = admin;
 		
-		try{
-			checkPassword(Password, CurrentPassword);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
 		User user = new User(Username, Password, resAdmin);
 		
 		try{
-			user = addUser(user);
+			checkPassword(Password, CurrentPassword);
+			try{
+				user = addUser(user);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}			
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
+		}	
 		return user;
 	}
 	

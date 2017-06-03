@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import fr.epsi.myEpsi.beans.User;
 import fr.epsi.myEpsi.service.UserService;
-import fr.epsi.myEpsi.forms.Login;
+import fr.epsi.myEpsi.forms.LoginForm;
 
 /**
  * Servlet implementation class login
@@ -30,7 +30,6 @@ public class login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.getRequestDispatcher("/home").forward(request, response);
 	}
 
@@ -39,7 +38,7 @@ public class login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Login login = new Login();	
+		LoginForm login = new LoginForm();	
 		User user = login.getConnectUser(request);
 		HttpSession session = request.getSession();
 		session.setAttribute("user", user);

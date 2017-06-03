@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.epsi.myEpsi.service.UserService;
 import fr.epsi.myEpsi.beans.User;
-import fr.epsi.myEpsi.forms.Signup;
+import fr.epsi.myEpsi.forms.SignupForm;
 
 /**
  * Servlet implementation class subscribe
  */
-@WebServlet("/subscribe")
-public class subscribe extends HttpServlet {
+@WebServlet("/signup")
+public class signup extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public subscribe() {
+    public signup() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,7 +40,7 @@ public class subscribe extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Signup signup = new Signup();		
+		SignupForm signup = new SignupForm();	
 		User user = signup.createUser(request);
 		request.setAttribute("user", user);
 		doGet(request, response);
